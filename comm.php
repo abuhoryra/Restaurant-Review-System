@@ -9,6 +9,29 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="nav.css">
     <title>Document</title>
+    <style>
+        .com1{
+             box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px deepskyblue;
+            background-color: #33cccc;
+            padding: 20px 20px;
+         
+            width: 500px;
+            margin: 10px auto;
+        }
+        
+        .l1{
+           font-size: 22px; 
+            font-weight: bold;
+            color: white;
+        }
+       
+        .im45{
+            border: 3px solid;
+            margin-left: 35%;
+            margin-top: 3%;
+        }
+        
+    </style>
 </head>
 <body>
    <?php
@@ -42,7 +65,7 @@ ini_set( "display_errors", 0);
 
 
    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-  <a class="navbar-brand"  href="index.html">Restaurent</a>
+  <a class="navbar-brand"  href="dash.php">Restaurent</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -64,8 +87,8 @@ ini_set( "display_errors", 0);
   </div>  
 </nav>
   
-<div class="container">
-  <div class="col-md-6">
+<div class=" con3 container">
+   
 
 <?php
 include_once("connection.php");
@@ -84,20 +107,26 @@ include_once("connection.php");
  echo '  
                            
                                  
-                                    <img height:150px;" class="im45 img-responsive" src="data:image/jpeg;base64,'.base64_encode($res['image'] ).'" height="400" width="450" class="img-thumnail" />  
+                                    <img  class="im45 img-responsive" src="data:image/jpeg;base64,'.base64_encode($res['image'] ).'" height="300" width="350" />  
                                 
                             
                      '; 
         
         ?>
         <br>
-     <h3><?php echo $res['resname'];  ?></h3>
+        <div class="f1">
+     <h3 style="text-align:center; color: salmon;"><?php echo $res['resname'];  ?></h3>
+       <br>
         
         <form method="post">
-             <div class="form-group">
+             <div class="form-group" style="margin-left:35%;">
       
-      <input type="text" class="form-control" name="comments">
-      <button type="submit" name="sub" class="btn btn-success">Send</button>
+      <input type="text" class="form-control col-md-6" name="comments">
+      <br>
+      <button type="submit" name="sub" class="btn btn-primary" style="margin-left:42%;">Send</button>
+      </div>
+      <br>
+      <br>
       
       <?php
                  
@@ -126,14 +155,18 @@ include_once("connection.php");
             
             include_once("connection.php");
              
-           $pql = "SELECT username,comments FROM comments WHERE resid='{$res['id']}'";
+           $pql = "SELECT username,comments FROM comments WHERE resid='{$res['id']}' ORDER BY comments DESC";
            $klm = mysqli_query($conn,$pql);
                 
             
             while ($nes = mysqli_fetch_array($klm)) {
             
             ?>
-            <p><label><?php echo $nes['username']; ?> </label> <?php echo $nes['comments']; ?></p>
+            <div class="com1">
+             <label class="l1"><?php echo $nes['username']; ?> </label> 
+              <p><?php echo $nes['comments']; ?></p>  
+            </div>
+            
             <?php
                 
                 
@@ -160,6 +193,7 @@ include_once("connection.php");
 ?>
 
 </div>  
-</div>
+  
+ 
 </body>
 </html>
